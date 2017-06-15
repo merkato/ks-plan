@@ -1,5 +1,5 @@
 # coding: utf-8
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ARRAY, Column, Date, Integer, String, Time, text
 from sqlalchemy.ext.declarative import declarative_base
 
