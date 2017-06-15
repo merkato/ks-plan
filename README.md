@@ -4,6 +4,7 @@ Wyszukiwarka służb i pociągów z planu
 ## Schema SQL
 
 Tabela **grafik.holidays** odpowiada za przechowywanie informacji o dniach świątecznych.
+
 |Nazwa|Typ  |
 |-----|-----|
 |id|serial|
@@ -19,7 +20,7 @@ Tabela **grafik.pociagi** odpowiada za informację o odcinkach obsługiwanych w 
 |termin|date|
 |wariant|varchar(2)|
 
-Tabela *grafik.sluzby* odpowiada za przechowywanie informacji o godzinie rozpoczęcia i zakończenia służby, oraz stacji początkowej. Na podstawie tabel sluzby i pociagi mozna przygotowac wydruk służby zgodny z wydawanym przez firmę. 
+Tabela **grafik.sluzby** odpowiada za przechowywanie informacji o godzinie rozpoczęcia i zakończenia służby, oraz stacji początkowej. Na podstawie tabel sluzby i pociagi mozna przygotowac wydruk służby zgodny z wydawanym przez firmę. 
 
 ## Wymagania
 * python
