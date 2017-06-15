@@ -1,39 +1,60 @@
-from flask_sqlalchemy import SQLAlchemy
-import datetime
+# coding: utf-8
+from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy import ARRAY, Column, Date, Integer, String, Time, text
+from sqlalchemy.ext.declarative import declarative_base
 
 db = SQLAlchemy()
 
-class BaseModel(db.Model):
-    """Base data model for all objects"""
-    __abstract__ = True
-
-    def __init__(self, *args):
-        super().__init__(*args)
-
-    def __repr__(self):
-        """Define a base way to print models"""
-        return '%s(%s)' % (self.__class__.__name__, {
-            column: value
-            for column, value in self._to_dict().items()
-        })
-
-    def json(self):
-        """
-                Define a base way to jsonify models, dealing with datetime objects
-        """
-        return {
-            column: value if not isinstance(value, datetime.date) else value.strftime('%Y-%m-%d')
-            for column, value in self._to_dict().items()
-        }
+Base = declarative_base()
+metadata = Base.metadata
 
 
-class Pociagi(BaseModel, db.Model):
-    """Model for the pociagi table"""
+class Holiday(Base):
+    __tablename__ = 'holidays'
+
+    termin = Column(Date)
+    opis = Column(String(100))
+    wariant = Column(String(2))
+    id = Column(Integer, primary_key=True, server_default=text("nextval('holidays_id_seq'::regclass)"))
+
+
+class Pociagi(Base):
     __tablename__ = 'pociagi'
-    id = db.Column(db.Integer, primary_key = True)
-    plan = db.Column(db.String(4))
-    obieg = db.Column(db.String(2))
-    nr_poc = db.Column(db.String(7))
-    termin = db.Column(db.DateTime)
-    wyklucz = db.Column(db.DateTime)
-    dolacz = db.Column(db.DateTime)
+
+    plan = Column(String(4))
+    obieg = Column(String(2))
+    nr_poc = Column(String(7))
+    termin = Column(ARRAY(Date()))
+    wyklucz = Column(ARRAY(Date()))
+    dolacz = Column(ARRAY(Date()))
+    wariant = Column(String(2))
+    st_pocz = Column(String(40))
+    st_konc = Column(String(40))
+    godz_pocz = Column(Time)
+    godz_konc = Column(Time)
+    tabor = Column(String(10))
+    id = Column(Integer, primary_key=True, server_default=text("nextval('pociagi_id_seq'::regclass)"))
+
+
+class User(Base):
+    __tablename__ = 'users'
+
+    user_id = Column(Integer, primary_key=True, server_default=text("nextval('users_user_id_seq'::regclass)"))
+    user_name = Column(String(6))
+    user_username = Column(String(45))
+    user_password = Column(String(45))
+    def is_active(self):
+        """True, as all users are active."""
+        return True
+
+    def get_id(self):
+        """Return the email address to satisfy Flask-Login's requirements."""
+        return self.email
+
+    def is_authenticated(self):
+        """Return True if the user is authenticated."""
+        return self.authenticated
+
+    def is_anonymous(self):
+        """False, as anonymous users aren't supported."""
+        return False

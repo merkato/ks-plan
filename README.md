@@ -25,4 +25,6 @@ Tabela *grafik.sluzby* odpowiada za przechowywanie informacji o godzinie rozpocz
 * python
 * python-psycopg2
 * flask
+* SQLAlchemy
+* flask-login
 * twitter bootstrap
