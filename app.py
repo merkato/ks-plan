@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, request
+from flask import Flask, render_template, json, redirect, url_for, request
 from models import db
 
 app = Flask(__name__)
@@ -17,23 +17,28 @@ db.init_app(app)
 def index():
     return render_template("index.html")
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+    
 @app.route('/showSignUp')
 def showSignUp():
     return render_template('signup.html')
 
-@app.route('/signUp',methods=['POST'])
-def signUp():
- 
-    # read the posted values from the UI
-    _name = request.form['inputName']
-    _email = request.form['inputEmail']
-    _password = request.form['inputPassword']
- 
-    # validate the received values
-    if _name and _email and _password:
-        return json.dumps({'html':'<span>All fields good !!</span>'})
-    else:
-        return json.dumps({'html':'<span>Enter the required fields</span>'})
+# route for handling the login page logic
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Try again'
+        else:
+            return redirect(url_for('dashboard'))
+    return render_template('login.html', error=error)
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('error.html'), 404
 
 if __name__ == '__main__':
   app.run(debug=True, host="0.0.0.0", port=49666)

@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>KŚ Plan - login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+ 
+ 
+  </head>
+  <body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Strona główna</a>
+                    </li>
+                    <li role="presentation"><a href="#">Zaloguj</a>
+                    </li>
+                    <li role="presentation"><a href="showSignUp">Stwórz konto</a>
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">KŚ Plan</h3>
+        </div>
+        
+		<div class="jumbotron">
+	      <h1>Zaloguj się</h1>
+      <br>
+      <form action="" method="post">
+        <input type="text" placeholder="Nr statystyczny" name="username" value="{{
+          request.form.username }}">
+         <input type="password" placeholder="Password" name="password" value="{{
+          request.form.password }}">
+        <input class="btn btn-default" type="submit" value="Login">
+      </form>
+      {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}
+      {% endif %}
+		</div>
+    </div>
+  </body>
+</html>
