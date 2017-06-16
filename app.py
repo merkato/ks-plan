@@ -46,9 +46,9 @@ def dashboard():
 @app.route("/dodaj_wolne", methods=["GET","POST"])
 def addholiday():
 	if request.method == 'POST':
-		termin_v = request.form.get('termin')
-		opis_v = request.form.get('opis')
-		wariant_v = request.form.get('wariant')
+		termin_v = request.form.get('inputTermin')
+		opis_v = request.form.get('inputOpis')
+		wariant_v = request.form.get('inputWariant')
 		holidays.insert(termin == termin_v, opis == opis_v, wariant == wariant_v)
 	return render_template("holiday.html")
 
