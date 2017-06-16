@@ -1,60 +1,43 @@
-# coding: utf-8
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import ARRAY, Column, Date, Integer, String, Time, text
-from sqlalchemy.ext.declarative import declarative_base
+from peewee import *
+from playhouse.postgres_ext import *
 
-db = SQLAlchemy()
+db = PostgresqlExtDatabase('osm', user='osm', password='osm')
 
-Base = declarative_base()
-metadata = Base.metadata
+class BaseExtModel(Model):
+    class Meta:
+        database = db
 
+class holidays(BaseExtModel):
+#    __tablename__ = 'holidays'
 
-class Holiday(Base):
-    __tablename__ = 'holidays'
-
-    termin = Column(Date)
-    opis = Column(String(100))
-    wariant = Column(String(2))
-    id = Column(Integer, primary_key=True, server_default=text("nextval('holidays_id_seq'::regclass)"))
+    termin = DateField()
+    opis = CharField(100)
+    wariant = CharField(2)
+    id = PrimaryKeyField()
 
 
-class Pociagi(Base):
-    __tablename__ = 'pociagi'
+class pociagi(BaseExtModel):
+#    __tablename__ = 'pociagi'
 
-    plan = Column(String(4))
-    obieg = Column(String(2))
-    nr_poc = Column(String(7))
-    termin = Column(ARRAY(Date()))
-    wyklucz = Column(ARRAY(Date()))
-    dolacz = Column(ARRAY(Date()))
-    wariant = Column(String(2))
-    st_pocz = Column(String(40))
-    st_konc = Column(String(40))
-    godz_pocz = Column(Time)
-    godz_konc = Column(Time)
-    tabor = Column(String(10))
-    id = Column(Integer, primary_key=True, server_default=text("nextval('pociagi_id_seq'::regclass)"))
+    plan = CharField(4)
+    obieg = CharField(2)
+    nr_poc = CharField(7)
+    termin = ArrayField(DateField)
+    wyklucz = ArrayField(DateField)
+    dolacz = ArrayField(DateField)
+    wariant = CharField(2)
+    st_pocz = CharField(40)
+    st_konc = CharField(40)
+    godz_pocz = TimeField()
+    godz_konc = TimeField()
+    tabor = CharField(10)
+    id = PrimaryKeyField()
 
 
-class User(Base):
-    __tablename__ = 'users'
+class users(BaseExtModel):
+#    __tablename__ = 'users'
 
-    user_id = Column(Integer, primary_key=True, server_default=text("nextval('users_user_id_seq'::regclass)"))
-    user_name = Column(String(6))
-    user_username = Column(String(45))
-    user_password = Column(String(45))
-    def is_active(self):
-        """True, as all users are active."""
-        return True
-
-    def get_id(self):
-        """Return the email address to satisfy Flask-Login's requirements."""
-        return self.email
-
-    def is_authenticated(self):
-        """Return True if the user is authenticated."""
-        return self.authenticated
-
-    def is_anonymous(self):
-        """False, as anonymous users aren't supported."""
-        return False
+    user_id = PrimaryKeyField()
+    user_name = CharField(6)
+    user_username = CharField(45)
+    user_password = CharField(45)
