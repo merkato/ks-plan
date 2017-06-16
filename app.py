@@ -48,7 +48,8 @@ def addholiday():
 		termin_v = request.form.get('inputTermin')
 		opis_v = request.form.get('inputOpis')
 		wariant_v = request.form.get('inputWariant')
-		holidays.insert(termin = termin_v, opis = opis_v, wariant = wariant_v)
+		q = holidays.insert(termin = termin_v, opis = opis_v, wariant = wariant_v)
+		q.execute()
 		return redirect(url_for('wolne'))
 	return render_template("holiday.html")
 
