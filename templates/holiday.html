@@ -1,0 +1,18 @@
+{# templates/holiday.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Terminy kursowania{% endblock %}
+{% block body %}      <div class="jumbotron">
+        <h1>Dodaj dzień wolny</h1>
+        <form class="form-signin">
+        <label for="inputTermin" class="sr-only">Termin</label>
+        <input type="termin" name="inputTermin" id="inputTermin" class="form-control" placeholder="Termin" required autofocus>
+        <label for="inputOpis" class="sr-only">Opis</label>
+        <input type="opis" name="inputOpis" id="inputOpis" class="form-control" placeholder="Opis" required autofocus>
+        <label for="inputWariant" class="sr-only">Termin kursowania</label>
+        <input type="wariant" name="inputwariant" id="inputWariant" class="form-control" placeholder="D/C" required>
+         
+        <button id="btnAddTermin" class="btn btn-lg btn-primary btn-block" type="button">Dodaj termin</button>
+      </form>
+      </div>
+{% endblock %}

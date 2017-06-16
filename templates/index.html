@@ -1,35 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
- 
-<head>
-    <title>KŚ Plan</title>
- 
- 
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
- 
-    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
- 
- 
-</head>
- 
-<body>
- 
-    <div class="container">
-        <div class="header">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Strona główna</a>
-                    </li>
-                    <li role="presentation"><a href="login">Zaloguj</a>
-                    </li>
-                    <li role="presentation"><a href="showSignUp">Stwórz konto</a>
-                    </li>
-                </ul>
-            </nav>
-            <h3 class="text-muted">KŚ Plan</h3>
-        </div>
- 
-        <div class="jumbotron">
+{# templates/index.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Plany służb KŚ{% endblock %}
+
+{% block body %}<div class="jumbotron">
             <h1>Wyszukiwanie służb</h1>
             <p class="lead"></p>
             <p><a class="btn btn-lg btn-success" href="showSignUp" role="button">Zaloguj się</a>
@@ -47,13 +21,5 @@
                 <h4>Dni świąteczne</h4>
                 <p>Kalendarz pracy</p>
             </div>
-        </div>
- 
-        <footer class="footer">
-            <p>&copy; GIS Beskidy 2017</p>
-        </footer>
- 
-    </div>
-</body>
- 
-</html>
+        </div>{% endblock %}
+
