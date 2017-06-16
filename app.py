@@ -1,10 +1,9 @@
 from flask import Flask, render_template, json, redirect, url_for, request
-from models import db
+from peewee import * 
+from models import *
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py', silent=True)
-
-#db.init_app(app)
 
 @app.route("/")
 def index():
@@ -49,8 +48,13 @@ def addholiday():
 		termin_v = request.form.get('inputTermin')
 		opis_v = request.form.get('inputOpis')
 		wariant_v = request.form.get('inputWariant')
-		holidays.insert(termin == termin_v, opis == opis_v, wariant == wariant_v)
+		holidays.insert(termin = termin_v, opis = opis_v, wariant = wariant_v)
+		return redirect(url_for('wolne'))
 	return render_template("holiday.html")
+
+@app.route("/wolne")
+def holiday():
+	return render_template("holiday_list.html",wolne=list(holidays.select()))
 
 @app.errorhandler(404)
 def not_found(error):

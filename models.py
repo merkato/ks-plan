@@ -1,23 +1,22 @@
 from peewee import *
 from playhouse.postgres_ext import *
 
-db = PostgresqlExtDatabase('osm', user='osm', password='osm')
+db = PostgresqlExtDatabase('ks', user='osm', password='osm')
 
 class BaseExtModel(Model):
     class Meta:
         database = db
+        db_schema = 'grafik'
 
 class holidays(BaseExtModel):
-#    __tablename__ = 'holidays'
 
-    termin = DateField()
-    opis = CharField(100)
-    wariant = CharField(2)
-    id = PrimaryKeyField()
+	termin = DateField()
+	opis = CharField(100)
+	wariant = CharField(2)
+	id = PrimaryKeyField()
 
 
 class pociagi(BaseExtModel):
-#    __tablename__ = 'pociagi'
 
     plan = CharField(4)
     obieg = CharField(2)
@@ -35,7 +34,6 @@ class pociagi(BaseExtModel):
 
 
 class users(BaseExtModel):
-#    __tablename__ = 'users'
 
     user_id = PrimaryKeyField()
     user_name = CharField(6)
