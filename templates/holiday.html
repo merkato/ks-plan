@@ -4,7 +4,7 @@
 {% block title %}Terminy kursowania{% endblock %}
 {% block body %}      <div class="jumbotron">
         <h1>Dodaj dzień wolny</h1>
-        <form class="form-signin">
+        <form method="POST" action="./dodaj_wolne" class="form-signin">
         <label for="inputTermin" class="sr-only">Termin</label>
         <input type="termin" name="inputTermin" id="inputTermin" class="form-control" placeholder="Termin" required autofocus>
         <label for="inputOpis" class="sr-only">Opis</label>
