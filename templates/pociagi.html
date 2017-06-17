@@ -69,10 +69,10 @@
       </div>
 <div>    <h2>Dni wolne</h2>
      <table class="table table-striped">
-      {% for dzien in wolne %}
+      {% for pociag in pociagi %}
      <tr>
-       <td>{{dzien.termin}}</td>
-       <td>{{dzien.opis}}</td>
+       <td>{{pociag.plan}}</td>
+       <td>{{pociag.nr_poc}}</td>
        <td>{{dzien.wariant}}</td>
      </tr>
      {%endfor%}
