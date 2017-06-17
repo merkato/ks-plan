@@ -6,12 +6,11 @@
         <h2>Dodaj dzień wolny</h2>
         <form method="POST" action="./wolne" class="form-signin">
         <label for="inputTermin" class="sr-only">Termin</label>
-        <input type="termin" name="inputTermin" id="inputTermin" class="form-control" placeholder="Termin" required autofocus>
+        <input type="date" name="inputTermin" id="inputTermin" class="form-control" placeholder="Termin" required autofocus>
         <label for="inputOpis" class="sr-only">Opis</label>
-        <input type="opis" name="inputOpis" id="inputOpis" class="form-control" placeholder="Opis" required autofocus>
+        <input type="text" name="inputOpis" id="inputOpis" class="form-control" placeholder="Opis" required autofocus>
         <label for="inputWariant" class="sr-only">Termin kursowania</label>
-        <input type="wariant" name="inputWariant" id="inputWariant" class="form-control" placeholder="D/C" required>
-
+        <select type="text" class="form-control" name="inputWariant" id="inputWariant"><option>D</option><option>C</option></select>
         <button id="btnAddTermin" class="btn btn-lg btn-danger btn-block">Dodaj termin</button>
       </form>
       </div>

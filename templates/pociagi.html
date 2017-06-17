@@ -1,0 +1,80 @@
+{# templates/pociagi.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Pociągi{% endblock %}
+{% block body %}      <div class="jumbotron">
+        <h2>Dodaj pociągi</h2>
+        <form method="POST" action="./pociagi" class="form-inline" role="form">
+        <label for="inputPlan" class="sr-only">Nr służby</label>
+        <input type="text" name="inputPlan" id="inputPlan" class="form-control" placeholder="K1" max-lenght="4" required autofocus>
+        <label for="inputObieg" class="sr-only">Nr obiegu</label>
+        <input type="text" name="inputObieg" id="inputObieg" class="form-control" placeholder="1" max-lenght="2" required autofocus>
+        <label for="inputPociag" class="sr-only">Nr pociągu</label>
+        <input type="text" name="inputPociag" id="inputPociag" class="form-control" placeholder="44004" required autofocus>
+        <label for="inputTermin" class="sr-only">Termin</label>
+        <input type="text" name="inputTermin" id="inputTermin" class="form-control" placeholder="2017-06-11,2017-08-06" required autofocus>
+        </br>
+        <label for="inputWyklucz" class="sr-only">Terminy wyłączone</label>
+        <input type="date" name="inputWyklucz" id="inputWyklucz" class="form-control" placeholder="2017-06-16" autofocus>
+        <label for="inputDolacz" class="sr-only">Terminy dodatkowe</label>
+        <input type="date" name="inputDolacz" id="inputDolacz" class="form-control" placeholder="2017-06-16" autofocus>
+        <label for="inputWariant" class="sr-only">Wariant dnia</label>
+        <select type="text" class="form-control" name="inputWariant" id="inputWariant">
+          <option>D</option>
+          <option>C</option>
+        </select></br>
+        <label for="inputGPocz" class="sr-only">Godz. odjazdu</label>
+        <input type="time" name="inputGPocz" id="inputGPocz" class="form-control" required autofocus>
+        <label for="inputSPocz" class="sr-only">Stacja początkowa</label>
+        <select type="text" class="form-control" data-live-search="true" name="inputSPocz" id="inputSPocz">
+          <option>Zwardoń</option>        <option>Żywiec</option>
+          <option>Bielsko-Biała</option>  <option>Czechowice-Dziedzice</option>
+          <option>Pszczyna</option>       <option>Katowice</option>
+          <option>Gliwice</option>        <option>Tychy Lodowisko</option>
+          <option>Tychy</option>          <option>Sosnowiec</option>
+          <option>Zawiercie</option>      <option>Łazy</option>
+          <option>Częstochowa</option>    <option>Lubliniec</option>
+          <option>Tarnowskie Góry</option><option>Bytom</option>
+          <option>Oświęcim</option>       <option>Wisła Głębce</option>
+          <option>Zebrzydowice</option>   <option>Cieszyn</option>
+       </select></br>
+        <label for="inputGKonc" class="sr-only">Godz. przyjazdu</label>
+        <input type="time" name="inputGKonc" id="inputGKonc" class="form-control" required autofocus>
+        <label for="inputSKonc" class="sr-only">Stacja końcowa</label>
+        <select type="text" class="form-control" name="inputSKonc" data-live-search="true" id="inputSKonc">
+          <option>Zwardoń</option>        <option>Żywiec</option>
+          <option>Bielsko-Biała</option>  <option>Czechowice-Dziedzice</option>
+          <option>Pszczyna</option>       <option>Katowice</option>
+          <option>Gliwice</option>        <option>Tychy Lodowisko</option>
+          <option>Tychy</option>          <option>Sosnowiec</option>
+          <option>Zawiercie</option>      <option>Łazy</option>
+          <option>Częstochowa</option>    <option>Lubliniec</option>
+          <option>Tarnowskie Góry</option><option>Bytom</option>
+          <option>Oświęcim</option>       <option>Wisła Głębce</option>
+          <option>Zebrzydowice</option>   <option>Cieszyn</option>
+       </select></br>
+        <label for="inputTabor" class="sr-only">Tabor planowy</label>
+        <select type="text" class="form-control" name="inputTabor" id="inputTabor">
+          <option>EN57</option><option>EN57KM</option>
+          <option>EN57AKŚ</option><option>EN71AKŚ</option>
+          <option>EN75</option><option>EN76</option>
+          <option>14WE</option>
+          <option>27WEb</option><option>35WE</option>
+          <option>36WEa</option>
+          <option>SA138</option>
+          <option>inny</option>
+       </select></br>
+        <button id="btnAddPociag" class="btn btn-success">Dodaj odcinek</button>
+      </form>
+      </div>
+<div>    <h2>Dni wolne</h2>
+     <table class="table table-striped">
+      {% for dzien in wolne %}
+     <tr>
+       <td>{{dzien.termin}}</td>
+       <td>{{dzien.opis}}</td>
+       <td>{{dzien.wariant}}</td>
+     </tr>
+     {%endfor%}
+</div>
+{% endblock %}

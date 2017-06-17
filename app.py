@@ -28,8 +28,8 @@ def trains():
 		wariant = request.form.get('inputWariant')
 		q = holidays.insert(termin = termin, opis = opis, wariant = wariant)
 		q.execute()
-		return redirect(url_for('holiday'))
-	return render_template("holiday.html",wolne=list(holidays.select()))
+		return redirect(url_for('pociagi'))
+	return render_template("pociagi.html",wolne=list(holidays.select()))
 
 @app.route("/sluzby", methods=["GET","POST"])
 def shifts():
