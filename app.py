@@ -40,18 +40,7 @@ def trains():
         q = pociagi.insert(plan = obieg, obieg = obieg, nr_poc = nr_poc, termin = termin, wyklucz = wariant, dolacz = dolacz, wariant = wariant, st_pocz = st_pocz, st_konc = st_konc, godz_pocz = godz_pocz, godz_konc = godz_konc, tabor = tabor)
         q.execute()
         return redirect(url_for('pociagi'))
-    return render_template("pociagi.html",wolne=list(pociagi.select().order_by(pociagi.nr_poc())))
-
-@app.route("/sluzby", methods=["GET","POST"])
-def shifts():
-    if request.method == 'POST':
-        termin = request.form.get('inputTermin')
-        opis = request.form.get('inputOpis')
-        wariant = request.form.get('inputWariant')
-        q = holidays.insert(termin = termin, opis = opis, wariant = wariant)
-        q.execute()
-        return redirect(url_for('holiday'))
-    return render_template("holiday.html",wolne=list(holidays.select()))
+    return render_template("pociagi.html",wolne=list(pociagi.select().order_by(pociagi.nr_poc.asc()))
 
 @app.errorhandler(404)
 def not_found(error):
