@@ -67,13 +67,13 @@
         <button id="btnAddPociag" class="btn btn-success">Dodaj odcinek</button>
       </form>
       </div>
-<div>    <h2>Dni wolne</h2>
+<div>    <h2>Lista pociągów obsługiwanych</h2>
      <table class="table table-striped">
       {% for pociag in pociagi %}
      <tr>
        <td>{{pociag.plan}}</td>
        <td>{{pociag.nr_poc}}</td>
-       <td>{{dzien.wariant}}</td>
+       <td>{{pociag.wariant}}</td>
      </tr>
      {%endfor%}
 </div>
