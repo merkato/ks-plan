@@ -1,46 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
- 
-<head>
-    <title>KŚ Plan</title>
- 
- 
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
- 
-    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
- 
- 
-</head>
- 
-<body>
- 
-    <div class="container">
-        <div class="header">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Strona główna</a>
-                    </li>
-                    <li role="presentation"><a href="login">Zaloguj</a>
-                    </li>
-                    <li role="presentation"><a href="showSignUp">Stwórz konto</a>
-                    </li>
-                </ul>
-            </nav>
-            <h3 class="text-muted">KŚ Plan</h3>
-        </div>
- 
+{# templates/error.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Tarcza D1 - poczekaj na komisję kolejową{% endblock %}
+{% block body %}
+
         <div class="jumbotron">
-            <h1>Wjechałeś na tor zamknięty.</h1>
+            <h1>Wjechałeś na tor zamknięty. Wywołaj dyżurnego ruchu.</h1>
             <p class="lead"></p>
             <p><img src="/static/d1.jpg"></img>
             </p>
         </div>
-
-        <footer class="footer">
-            <p>&copy; GIS Beskidy 2017</p>
-        </footer>
- 
-    </div>
-</body>
- 
-</html>
+{% endblock %}

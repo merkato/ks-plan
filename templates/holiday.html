@@ -3,16 +3,26 @@
 {% extends "layout.html" %}
 {% block title %}Terminy kursowania{% endblock %}
 {% block body %}      <div class="jumbotron">
-        <h1>Dodaj dzień wolny</h1>
-        <form method="POST" action="./dodaj_wolne" class="form-signin">
+        <h2>Dodaj dzień wolny</h2>
+        <form method="POST" action="./wolne" class="form-signin">
         <label for="inputTermin" class="sr-only">Termin</label>
         <input type="termin" name="inputTermin" id="inputTermin" class="form-control" placeholder="Termin" required autofocus>
         <label for="inputOpis" class="sr-only">Opis</label>
         <input type="opis" name="inputOpis" id="inputOpis" class="form-control" placeholder="Opis" required autofocus>
         <label for="inputWariant" class="sr-only">Termin kursowania</label>
         <input type="wariant" name="inputWariant" id="inputWariant" class="form-control" placeholder="D/C" required>
-         
-        <button id="btnAddTermin" class="btn btn-lg btn-primary btn-block">Dodaj termin</button>
+
+        <button id="btnAddTermin" class="btn btn-lg btn-danger btn-block">Dodaj termin</button>
       </form>
       </div>
+<div>    <h2>Dni wolne</h2>
+     <table class="table table-striped">
+      {% for dzien in wolne %}
+     <tr>
+       <td>{{dzien.termin}}</td>
+       <td>{{dzien.opis}}</td>
+       <td>{{dzien.wariant}}</td>
+     </tr>
+     {%endfor%}
+</div>
 {% endblock %}
