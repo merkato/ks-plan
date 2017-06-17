@@ -6,6 +6,18 @@ from models import *
 app = Flask(__name__)
 app.config.from_pyfile('config.py', silent=True)
 
+def login_required(fn):
+    @functools.wraps(fn)
+    def inner(*args, **kwargs):
+        if session.get('logged_in'):
+            return fn(*args, **kwargs)
+        return redirect(url_for('login', next=request.path))
+    return inner
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('error.html'), 404
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -21,7 +33,6 @@ def holiday():
         return redirect(url_for('holiday'))
     return render_template("holiday.html",wolne=list(holidays.select().order_by(holidays.termin.asc())))
 
-# Zakladka pociagi, edycja danych i wyswietlanie informacji o odcinkach obslugiwanych
 @app.route("/pociagi", methods=["GET","POST"])
 def trains():
     if request.method == 'POST':
@@ -40,19 +51,7 @@ def trains():
         q = pociagi.insert(plan = obieg, obieg = obieg, nr_poc = nr_poc, termin = termin, wyklucz = wariant, dolacz = dolacz, wariant = wariant, st_pocz = st_pocz, st_konc = st_konc, godz_pocz = godz_pocz, godz_konc = godz_konc, tabor = tabor)
         q.execute()
         return redirect(url_for('pociagi'))
-    return render_template("pociagi.html",wolne=list(pociagi.select().order_by(pociagi.nr_poc.asc()))
-
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('error.html'), 404
-
-def login_required(fn):
-    @functools.wraps(fn)
-    def inner(*args, **kwargs):
-        if session.get('logged_in'):
-            return fn(*args, **kwargs)
-        return redirect(url_for('login', next=request.path))
-    return inner
+    return render_template("pociagi.html",wolne=list(pociagi.select().order_by(pociagi.nr_poc)))
 
 if __name__ == '__main__':
-  app.run(host="0.0.0.0", port=49666)
+    app.run(host="0.0.0.0", port=49666)
