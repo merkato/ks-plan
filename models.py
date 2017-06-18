@@ -32,6 +32,15 @@ class pociagi(BaseExtModel):
     tabor = CharField(10)
     id = PrimaryKeyField()
 
+class sluzby(BaseExtModel):
+
+    plan = CharField(4)
+    godz_pocz = TimeField()
+    godz_konc = TimeField()
+    st_pocz = CharField(40)
+    termin = ArrayField(DateField)
+    wariant = CharField(2)
+    id = PrimaryKeyField()
 
 class users(BaseExtModel):
 

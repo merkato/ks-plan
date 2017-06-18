@@ -1,0 +1,49 @@
+{# templates/edytuj_sluzby.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Pociągi{% endblock %}
+{% block body %}      <div class="jumbotron">
+        <h2>Dodaj pociągi</h2>
+        <form method="POST" action="./edytuj_sluzby" class="form-inline" role="form">
+        <label for="inputPlan" class="sr-only">Nr służby</label>
+        <input type="text" name="inputPlan" id="inputPlan" class="form-control" placeholder="K1" max-lenght="4" required autofocus>
+        <label for="inputTermin" class="sr-only">Termin</label>
+        <input type="text" name="inputTermin" id="inputTermin" class="form-control" placeholder="2017-06-11,2017-08-06" required autofocus>
+        </br>
+        <label for="inputWariant" class="sr-only">Wariant dnia</label>
+        <select type="text" class="form-control" name="inputWariant" id="inputWariant">
+          <option>D</option>
+          <option>C</option>
+        </select></br>
+        <label for="inputGPocz" class="sr-only">Godz. odjazdu</label>
+        <input type="time" name="inputGPocz" id="inputGPocz" class="form-control" required autofocus>
+        <label for="inputGKonc" class="sr-only">Godz. przyjazdu</label>
+        <input type="time" name="inputGKonc" id="inputGKonc" class="form-control" required autofocus>
+        <label for="inputSPocz" class="sr-only">Stacja początkowa</label>
+        <select type="text" class="form-control" data-live-search="true" name="inputSPocz" id="inputSPocz">
+          <option>Zwardoń</option>        <option>Żywiec</option>
+          <option>Bielsko-Biała</option>  <option>Czechowice-Dziedzice</option>
+          <option>Pszczyna</option>       <option>Katowice</option>
+          <option>Gliwice</option>        <option>Tychy Lodowisko</option>
+          <option>Tychy</option>          <option>Sosnowiec</option>
+          <option>Zawiercie</option>      <option>Łazy</option>
+          <option>Częstochowa</option>    <option>Lubliniec</option>
+          <option>Tarnowskie Góry</option><option>Bytom</option>
+          <option>Oświęcim</option>       <option>Wisła Głębce</option>
+          <option>Zebrzydowice</option>   <option>Cieszyn</option>
+       </select></br>
+        <button id="btnAddSluzba" class="btn btn-success">Dodaj służbę</button>
+      </form>
+      </div>
+<div>    <h2>Lista służb</h2>
+     <table class="table table-striped">
+      {% for sluzba in sluzby %}
+     <tr>
+       <td>{{sluzba.plan}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+       <td>{{sluzba.wariant}}</td>
+     </tr>
+     {%endfor%}
+</div>
+{% endblock %}
