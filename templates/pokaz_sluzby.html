@@ -1,0 +1,22 @@
+{# templates/pokaz_sluzby.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Służby{% endblock %}
+{% block body %}
+  <div class="jumbotron">
+    <h2>Lista służb</h2>
+     <table class="table table-striped">
+      {% for sluzba in sluzby %}
+     <tr>
+       <td><a href="/raport_sluzby?sluzba={{sluzba.plan}}">{{sluzba.plan}}</a></td>
+       <td>{{sluzba.st_pocz}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+       <td>{{sluzba.termin}}</td>
+       <td>{{sluzba.wariant}}</td>
+       <td><a href="/raport_sluzby_druk?sluzba={{sluzba.plan}}">{{sluzba.plan}} - PDF</a>
+     </tr>
+     {%endfor%}
+   </table>
+</div>
+{% endblock %}

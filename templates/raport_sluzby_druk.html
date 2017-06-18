@@ -1,0 +1,47 @@
+{# templates/raport_sluzby_druk.html_ #}
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>Raport dla służby</title>
+<meta charset="utf-8" />
+
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+<div class="container">
+{% block body %}
+   <h2>Służba {{sluzba.plan}}</h2>
+     <table class="table">
+     <tr class="bg-danger">
+       <td>{{sluzba.plan}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+       <td>{{sluzba.st_pocz}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+      <td colspan='3'>&nbsp;</td>
+       <td>{{sluzba.wariant}}</td>
+     </tr>
+     {% for pociag in obsady %}
+     <tr>
+       <td>&nbsp;</td>
+       <td class="bg-info">{{pociag.godz_pocz}}</td>
+       <td>{{pociag.st_pocz}}</td>
+       <td class="bg-info">{{pociag.godz_konc}}</td>
+       <td>{{pociag.st_konc}}</td>
+       <td>{{pociag.tabor}}</td>
+       <td colspan='2'>{{pociag.termin}}</td>
+     </tr>
+     {%endfor%}
+   </table>
+{% endblock %}
+<footer class="footer">
+  <p>&copy; GIS Beskidy 2017</p>
+</footer></div>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+{# templates/pokaz_sluzby.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Plan dla służby{% endblock %}
+{% block body %}
+   <h2>Służba {{sluzba.plan}}</h2>
+     <table class="table">
+     <tr class="bg-danger">
+       <td>{{sluzba.plan}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+       <td>{{sluzba.st_pocz}}</td>
+       <td>{{sluzba.godz_pocz}}</td>
+      <td colspan='3'>&nbsp;</td>
+       <td>{{sluzba.wariant}}</td>
+     </tr>
+     {% for pociag in obsady %}
+     <tr>
+       <td>&nbsp;</td>
+       <td class="bg-info">{{pociag.godz_pocz}}</td>
+       <td>{{pociag.st_pocz}}</td>
+       <td class="bg-info">{{pociag.godz_konc}}</td>
+       <td>{{pociag.st_konc}}</td>
+       <td>{{pociag.tabor}}</td>
+       <td colspan='2'>{{pociag.termin}}</td>
+     </tr>
+     {%endfor%}
+   </table>
+{% endblock %}

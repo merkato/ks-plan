@@ -74,6 +74,23 @@ def edit_shifts():
         q.execute()
         return redirect(url_for('edit_shifts'))
     return render_template("edytuj_sluzby.html", sluzby =list(sluzby.select()))
+@app.route("/pokaz_sluzby")
+def showShifts():
+    return render_template("pokaz_sluzby.html", sluzby=list(sluzby.select().order_by(sluzby.plan).asc()))
+
+@app.route("/raport_sluzby")
+def raport_sluzby():
+    plan = request.args.get('sluzba')
+    sluzba = sluzby.get(sluzby.plan == plan)
+    obsady = list(pociagi.select().where(pociagi.plan == plan))
+    return render_template("/raport_sluzby.html", sluzba = sluzba, obsady= obsady)
+
+@app.route("/raport_sluzby_druk")
+def raport_sluzby_druk():
+    plan = request.args.get('sluzba')
+    sluzba = sluzby.get(sluzby.plan == plan)
+    obsady = list(pociagi.select().where(pociagi.plan == plan))
+    return render_template("/raport_sluzby_druk.html", sluzba = sluzba, obsady= obsady)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=49666)

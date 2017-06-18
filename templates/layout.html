@@ -1,10 +1,10 @@
 {# templates/layout.html_ #}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <title>{% block title %}{% endblock %}</title>
-
+<meta charset="utf-8" />
 
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -33,11 +33,10 @@
         </div>
     {% block body %}
     {% endblock %}
-        <footer class="footer">
-            <p>&copy; GIS Beskidy 2017</p>
-        </footer>
 
-    </div>
+  <footer class="footer">
+    <p>&copy; GIS Beskidy 2017</p>
+  </footer></div>
 </body>
 
 </html>
