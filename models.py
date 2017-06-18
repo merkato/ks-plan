@@ -18,7 +18,7 @@ class holidays(BaseExtModel):
 
 class pociagi(BaseExtModel):
 
-    plan = CharField(4)
+    plan = CharField(6)
     obieg = CharField(2)
     nr_poc = CharField(7)
     termin = ArrayField(DateField)
@@ -34,7 +34,7 @@ class pociagi(BaseExtModel):
 
 class sluzby(BaseExtModel):
 
-    plan = CharField(4)
+    plan = CharField(6)
     godz_pocz = TimeField()
     godz_konc = TimeField()
     st_pocz = CharField(40)

@@ -3,7 +3,7 @@
 {% extends "layout.html" %}
 {% block title %}Pociągi{% endblock %}
 {% block body %}      <div class="jumbotron">
-        <h2>Dodaj pociągi</h2>
+        <h2>Dodaj służbę</h2>
         <form method="POST" action="./edytuj_sluzby" class="form-inline" role="form">
         <label for="inputPlan" class="sr-only">Nr służby</label>
         <input type="text" name="inputPlan" id="inputPlan" class="form-control" placeholder="K1" max-lenght="4" required autofocus>
@@ -31,6 +31,7 @@
           <option>Tarnowskie Góry</option><option>Bytom</option>
           <option>Oświęcim</option>       <option>Wisła Głębce</option>
           <option>Zebrzydowice</option>   <option>Cieszyn</option>
+          <option>Rybnik</option><option>Racibórz</option>
        </select></br>
         <button id="btnAddSluzba" class="btn btn-success">Dodaj służbę</button>
       </form>
@@ -41,9 +42,10 @@
      <tr>
        <td>{{sluzba.plan}}</td>
        <td>{{sluzba.godz_pocz}}</td>
-       <td>{{sluzba.godz_pocz}}</td>
+       <td>{{sluzba.godz_konc}}</td>
        <td>{{sluzba.wariant}}</td>
      </tr>
      {%endfor%}
+   </table>
 </div>
 {% endblock %}
