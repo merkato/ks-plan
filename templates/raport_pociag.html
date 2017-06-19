@@ -1,0 +1,31 @@
+{# templates/raport_pociag.html_ #}
+
+{% extends "layout.html" %}
+{% block title %}Wyszukiwanie obsad{% endblock %}
+{% block body %}      <div class="jumbotron">
+        <h2>Szukaj obsad wg numeru pociągu</h2>
+        <form method="POST" action="./raport_pociag" class="form-inline" role="form">
+        <label for="inputPociag" class="sr-only">Nr pociągu</label>
+        <input type="text" name="inputPociag" id="inputPociag" class="form-control" placeholder="44004" required autofocus>
+        <label for="inputWariant" class="sr-only">Wariant dnia</label>
+        <select type="text" class="form-control" name="inputWariant" id="inputWariant">
+          <option>D</option>
+          <option>C</option>
+        </select></br>
+        <button id="btnAddPociag" class="btn btn-info">Wyszukaj</button>
+      </form>
+      </div>
+<div>    <h2>Lista obsad na pociągu {{pociagi.nr_poc}}</h2>
+     <table class="table table-striped">
+      {% for pociag in pociagi %}
+     <tr>
+       <td>{{pociagi.plan}}</td>
+       <td>{{pociagi.godz_pocz}}</td>
+       <td>{{pociagi.st_pocz}}</td>
+       <td>{{pociagi.godz_konc}}</td>
+       <td>{{pociagi.st_konc}}</td>
+     </tr>
+     {%endfor%}
+   </table>
+</div>
+{% endblock %}

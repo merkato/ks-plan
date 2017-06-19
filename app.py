@@ -2,6 +2,8 @@
 from flask import Flask, render_template, json, redirect, url_for, request
 from peewee import *
 from models import *
+from xhtml2pdf import pisa
+from StringIO import StringIO
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py', silent=True)
@@ -13,6 +15,11 @@ def login_required(fn):
             return fn(*args, **kwargs)
         return redirect(url_for('login', next=request.path))
     return inner
+
+def create_pdf(pdf_data):
+    pdf = StringIO()
+    pisa.CreatePDF(StringIO(pdf_data), pdf)
+    return pdf
 
 @app.errorhandler(404)
 def not_found(error):
@@ -61,6 +68,14 @@ def edit_trains():
         return redirect(url_for('edit_trains'))
     return render_template("edytuj_pociagi.html",pociagi=list(pociagi.select().order_by(pociagi.nr_poc)))
 
+@app.route("/raport_pociag")
+def raport_train():
+    if request.method == 'POST':
+        pociag = request.form.get('inputPociag')
+        wariant = request.form.get('inputWariant')
+        return redirect(url_for('raport_train'))
+    return render_template("raport_pociag.html", pociagi = list(pociagi.select().where((pociagi.nr_poc == pociag) & (pociagi.wariant == wariant).order_by(pociagi.godz_pocz))))
+
 @app.route("/edytuj_sluzby", methods=["GET","POST"])
 def edit_shifts():
     if request.method == 'POST':
@@ -74,6 +89,7 @@ def edit_shifts():
         q.execute()
         return redirect(url_for('edit_shifts'))
     return render_template("edytuj_sluzby.html", sluzby =list(sluzby.select()))
+
 @app.route("/pokaz_sluzby")
 def showShifts():
     return render_template("pokaz_sluzby.html", sluzby=list(sluzby.select().order_by(sluzby.plan).asc()))
@@ -90,7 +106,8 @@ def raport_sluzby_druk():
     plan = request.args.get('sluzba')
     sluzba = sluzby.get(sluzby.plan == plan)
     obsady = list(pociagi.select().where(pociagi.plan == plan))
-    return render_template("/raport_sluzby_druk.html", sluzba = sluzba, obsady= obsady)
+    pdf_print = create_pdf(render_template("/raport_sluzby_druk.html", sluzba = sluzba, obsady= obsady))
+    return pdf_print
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=49666)
