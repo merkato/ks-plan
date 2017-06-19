@@ -68,13 +68,11 @@ def edit_trains():
         return redirect(url_for('edit_trains'))
     return render_template("edytuj_pociagi.html",pociagi=list(pociagi.select().order_by(pociagi.nr_poc)))
 
-@app.route("/raport_pociag")
+@app.route("/raport_pociag", methods=["GET"])
 def raport_train():
-    if request.method == 'POST':
-        pociag = request.form.get('inputPociag')
-        wariant = request.form.get('inputWariant')
-        return redirect(url_for('raport_train'))
-    return render_template("raport_pociag.html", pociagi = list(pociagi.select().where((pociagi.nr_poc == pociag) & (pociagi.wariant == wariant).order_by(pociagi.godz_pocz))))
+    pociag = request.args.get('inputPociag')
+    wariant = request.args.get('inputWariant')
+    return render_template("raport_pociag.html", pociagi = list(pociagi.select().where((pociagi.nr_poc == pociag) & (pociagi.wariant == wariant)).order_by(pociagi.godz_pocz)), pociag = pociag)
 
 @app.route("/edytuj_sluzby", methods=["GET","POST"])
 def edit_shifts():
