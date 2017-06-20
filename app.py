@@ -73,7 +73,7 @@ def raport_train():
     pociag = request.args.get('Pociag')
     wariant = request.args.get('Wariant')
     dzien = request.args.get('Dzien')
-    return render_template("raport_pociag.html", pociagi = list(pociagi.select().where((pociagi.nr_poc == pociag) & (pociagi.wariant == wariant)).order_by(pociagi.godz_pocz)), pociag = pociag)
+    return render_template("raport_pociag.html", pociagi = list(pociagi.select().where((pociagi.nr_poc == pociag) & (pociagi.wariant == wariant) & (dzien between pociagi.termin[1] & pociagi.termin[2])).order_by(pociagi.godz_pocz)), pociag = pociag)
 
 @app.route("/edytuj_sluzby", methods=["GET","POST"])
 def edit_shifts():
