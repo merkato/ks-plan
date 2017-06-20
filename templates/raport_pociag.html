@@ -5,13 +5,15 @@
 {% block body %}      <div class="jumbotron">
         <h2>Szukaj obsad wg numeru pociągu</h2>
         <form method="GET" action="./raport_pociag" class="form-inline" role="form">
-        <label for="inputPociag" class="sr-only">Nr pociągu</label>
-        <input type="text" name="inputPociag" id="inputPociag" class="form-control" placeholder="44004" required autofocus>
-        <label for="inputWariant" class="sr-only">Wariant dnia</label>
-        <select type="text" class="form-control" name="inputWariant" id="inputWariant">
+        <label for="Pociag" class="sr-only">Nr pociągu</label>
+        <input type="text" name="Pociag" id="Pociag" class="form-control" placeholder="44004" required autofocus>
+        <label for="Wariant" class="sr-only">Wariant dnia</label>
+        <select type="text" class="form-control" name="Wariant" id="Wariant">
           <option>D</option>
           <option>C</option>
         </select></br>
+        <label for="Dzien" class="sr-only">Termin</label>
+        <input type="date" name="Dzien" id="Dzien" class="form-control" placeholder="2017-06-22" autofocus>
         <button id="btnAddPociag" class="btn btn-info">Wyszukaj</button>
       </form>
       </div>
